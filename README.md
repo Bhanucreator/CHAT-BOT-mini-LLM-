@@ -32,7 +32,8 @@ WebSockets: A communication protocol for real-time applications.
 
 python-dotenv: For managing environmental variables.
 
-Render: The cloud platform used for deployment.
+Render: The cloud platform used for deployment.[link=[https://the-pythonic-guide.onrender.com/](https://the-pythonic-guide.onrender.com)]
 
 <img width="500" height="700" alt="image" src="https://github.com/user-attachments/assets/3b036273-1e22-40e4-a356-6b80137ec6ba" />
+
 
