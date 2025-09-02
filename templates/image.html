@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h3>
+        Add input to generate images from a personal chatbot
+    </h3>
+    <form action="/image" method="POST">
+        <div>
+            <textarea class="form-control" placeholder="Add input here" name="user_input" rows="3"></textarea>
+            <button class="btn btn-primary mt-1" type="submit">Send</button>
+        </div>
+    </form>
+
+    {% if error_message %}
+    <div class="alert alert-danger mt-3" role="alert">
+        {{ error_message }}
+    </div>
+    {% endif %}
+
+    {% if image_url %}
+    <div>
+        <div class="card text-center mt-3">
+            <div class="card-header">
+                Generated Image
+            </div>
+            <div class="card-body">
+                <div>
+                    <img src="{{ image_url }}" alt="Generated Image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

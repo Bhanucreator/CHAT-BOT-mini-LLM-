@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold text-white me-3" href="/" style="font-size: 1.3rem;">
+      Python Tutor AI
+    </a>
+
+    <!-- Services Dropdown (moved next to brand) -->
+    <div class="btn-group">
+      <button type="button" 
+              class="btn btn-outline-light dropdown-toggle px-4 py-2 rounded-pill shadow-sm" 
+              data-bs-toggle="dropdown" aria-expanded="false"
+              style="font-weight: 500;">
+         Services
+      </button>
+      <ul class="dropdown-menu shadow-lg border-0 rounded-3">
+        <li>
+          <a class="dropdown-item py-2 px-3 fw-semibold" href="/">
+            💬 Chatbot
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item py-2 px-3 fw-semibold" href="/image">
+            Image Generator
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Spacer to push remaining items right if needed -->
+    <div class="collapse navbar-collapse justify-content-end"></div>
+  </div>
+</nav>
+
+<style>
+  /* Remove hover background from dropdown items */
+  .dropdown-menu .dropdown-item:hover {
+    background-color: transparent !important;
+    color: #000 !important; /* Keep normal text color */
+    font-weight: 600; /* Slightly bold on hover */
+  }
+</style>

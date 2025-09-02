@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <title>FastAPI Chatbot</title>
+
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+
+            .chat-history {
+                max-height: 400px; /* Or any height you prefer */
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                padding: 15px;
+                border: 1px solid #dee2e6;
+                border-radius: .25rem;
+            }
+
+            .chat-message {
+                padding: 10px 15px;
+                border-radius: 18px;
+                max-width: 70%;
+                margin-bottom: 10px;
+                word-wrap: break-word;
+            }
+
+            .user-input {
+                background-color: #e3f2fd; /* Light blue for user */
+                align-self: flex-end; /* Align to the right */
+                border: 1px solid #b3e5fc;
+            }
+
+            .ai-response {
+                background-color: #f1f1f1; /* Light gray for AI */
+                align-self: flex-start; /* Align to the left */
+                border: 1px solid #e0e0e0;
+            }
+
+            .card-header {
+                background-color: #fff;
+                font-weight: bold;
+                color: #495057;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            /* Optional: Add some basic styling for the input section */
+            #footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: #fff;
+                padding: 15px;
+                border-top: 1px solid #dee2e6;
+            }
+        </style>
+
+    </head>
+    <body>
+        {% include 'navbar.html' %}
+        <div class="container mt-5">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -1,0 +1,96 @@
+{% include 'layout.html' %}
+
+<div class="container mt-5">
+    <h3>
+        Add input to chat with personal chatbot
+    </h3>
+
+    <div>
+        <div class="card text-center mt-3">
+            <div class="card-header">
+                Chat History:
+            </div>
+            <div class="card-body chat-history" id="chatHistory">
+                {% for response in chat_response %}
+            </div>
+            <div class="{{ 'chat-message user-input'if loop.index0 is even else 'chat-message ai-response'}}">
+                {{response}}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container" id="footer">
+        <div class="input-group mb-3">
+            <input class="form-control" placeholder="Add input here" id="userInput">
+            <button class="btn btn-outline-primary" type="button" id="sendButton">Send</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var websocketString = '';
+    if (window.location.hostname === '127.0.0.1') {
+        websocketString = "ws://localhost:8000/ws";
+    } else {
+        websocketString = `wss://${window.location.hostname}/ws`;
+    }
+
+    var ws = new WebSocket(websocketString);
+    var sendButton = document.getElementById("sendButton");
+    var userInput = document.getElementById("userInput");
+    var chatHistory = document.getElementById("chatHistory");
+
+    // This is for streaming AI responses.
+    var aiResponseDiv = null;
+
+    ws.onmessage = function(event) {
+        var message = event.data;
+        if (message) {
+            // Check if it's the start of a new AI message.
+            if (!aiResponseDiv || aiResponseDiv.dataset.complete === 'true') {
+                aiResponseDiv = document.createElement("div");
+                aiResponseDiv.className = "chat-message ai-response";
+                aiResponseDiv.dataset.complete = 'false';
+                chatHistory.appendChild(aiResponseDiv);
+            }
+            
+            // Append the new chunk to the current AI message.
+            aiResponseDiv.textContent += message;
+
+            // Scroll to the bottom of the chat.
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+    };
+
+    sendButton.onclick = function() {
+        var message = userInput.value.trim();
+        if (message) {
+            var userInputDiv = document.createElement("div");
+            userInputDiv.className = "chat-message user-input";
+            userInputDiv.textContent = message;
+            chatHistory.appendChild(userInputDiv);
+
+            // Mark the last AI message as complete before sending the next user message.
+            if (aiResponseDiv) {
+                aiResponseDiv.dataset.complete = 'true';
+            }
+
+            // Scroll to the bottom.
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            ws.send(message);
+            userInput.value = "";
+        }
+    };
+    
+    // Allow pressing Enter to send the message
+    userInput.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevents the default action of the enter key
+            sendButton.click();
+        }
+    });
+
+</script>
